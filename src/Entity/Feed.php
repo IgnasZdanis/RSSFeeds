@@ -18,7 +18,7 @@ class Feed
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string")
      */
     private $title;
 
@@ -33,12 +33,12 @@ class Feed
     private $url;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $mostRecentArticleTitle;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $mostRecentArticleUrl;
 

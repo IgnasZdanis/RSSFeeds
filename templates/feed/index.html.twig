@@ -12,8 +12,12 @@
             <hr>
             <h2><a href={{ feed.url }}>{{ feed.title }}</a></h2>
             <h3>Last updated: {{ feed.updateDate | date }}</h3>
-            <h3>{{ feed.articleCount }} articles in this feed</h3>
-            <h3>most recent: <a href={{ feed.mostRecentArticleUrl }}>{{ feed.mostRecentArticleTitle }}</a></h3>
+            {% if feed.articleCount == 0 %}
+                <h3>There are no articles in this feed</h3>
+            {% else %}
+                <h3>{{ feed.articleCount }} articles in this feed</h3>
+                <h3>most recent: <a href={{ feed.mostRecentArticleUrl }}>{{ feed.mostRecentArticleTitle }}</a></h3>
+            {% endif %}
         {% endfor %}
     {% endif %}
 </div>

@@ -16,10 +16,10 @@ class FeedFactory
         $articles = $crawler->filterXPath('//rss/channel/item');
         $articleCount = $crawler->filterXPath('//rss/channel/item')->count();
         $link = $crawler->filterXPath('//rss/channel/link')->text();
+        $latestArticleTitle = null;
+        $latestArticleUrl = null;
         if ($articleCount) {
             $maxDate = null;
-            $latestArticleTitle = null;
-            $latestArticleUrl = null;
             foreach ($articles as $article) {
                 $crawler = new Crawler($article);
                 if ($crawler->filterXPath('//pubDate')->count()) {
