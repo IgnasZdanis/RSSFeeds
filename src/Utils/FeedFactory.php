@@ -17,6 +17,15 @@ class FeedFactory
         $latestArticleTitle = $crawler->filterXPath('//rss/channel/item[1]/title')->text();
         $latestArticleUrl = $crawler->filterXPath('//rss/channel/item[1]/link')->text();
         $articleCount = $crawler->filterXPath('//rss/channel/item')->count();
-        return new Feed($title, $url, $latestArticleTitle, $latestArticleUrl, $articleCount, new \DateTime($update), $category);
+        $link = $crawler->filterXPath('//rss/channel/link')->text();
+        return new Feed(
+            $title,
+            $link,
+            $latestArticleTitle,
+            $latestArticleUrl,
+            $articleCount,
+            new \DateTime($update),
+            $category
+        );
     }
 }

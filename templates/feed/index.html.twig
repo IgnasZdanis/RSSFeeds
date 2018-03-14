@@ -4,14 +4,17 @@
 
 {% block body %}
 <div>
-    <h1>{{ feeds|length }} feeds assigned to this category</h1>
-    {% for feed in feeds %}
-        <hr>
-        <h3>{{ feed.title }}</h3>
-        <h3>Last updated: {{ feed.updateDate | date }}</h3>
-        <h3>{{ feed.articleCount }} articles in this feed</h3>
-        <h3>most recent: {{ feed.mostRecentArticleTitle }}</h3>
-        <h3>{{ feed.mostRecentArticleUrl }}</h3>
-    {% endfor %}
+    {% if feeds | length == 0 %}
+        <h1>No feeds assigned to this category</h1>
+    {% else %}
+        <h1>{{ feeds|length }} feeds assigned to this category</h1>
+        {% for feed in feeds %}
+            <hr>
+            <h2><a href={{ feed.url }}>{{ feed.title }}</a></h2>
+            <h3>Last updated: {{ feed.updateDate | date }}</h3>
+            <h3>{{ feed.articleCount }} articles in this feed</h3>
+            <h3>most recent: <a href={{ feed.mostRecentArticleUrl }}>{{ feed.mostRecentArticleTitle }}</a></h3>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
