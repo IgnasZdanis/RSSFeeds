@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,7 +23,12 @@ class Feed
     private $title;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $category;
+    /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Url()
      */
     private $url;
 
@@ -42,6 +48,25 @@ class Feed
     private $articleCount;
 
     /**
+     * @param $title
+     * @param $url
+     * @param $mostRecentArticleTitle
+     * @param $mostRecentArticleUrl
+     * @param $articleCount
+     * @param $updateDate
+     */
+    public function __construct($title, $url, $mostRecentArticleTitle, $mostRecentArticleUrl, $articleCount, $updateDate, $category)
+    {
+        $this->title = $title;
+        $this->url = $url;
+        $this->mostRecentArticleTitle = $mostRecentArticleTitle;
+        $this->mostRecentArticleUrl = $mostRecentArticleUrl;
+        $this->articleCount = $articleCount;
+        $this->updateDate = $updateDate;
+        $this->category = $category;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -55,6 +80,22 @@ class Feed
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
     }
 
     /**
