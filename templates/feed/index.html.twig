@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Feed{% endblock %}
+
+{% block body %}
+<div>
+    <h1>{{ feeds|length }} feeds assigned to this category</h1>
+    {% for feed in feeds %}
+        <hr>
+        <h3>{{ feed.title }}</h3>
+        <h3>Last updated: {{ feed.updateDate | date }}</h3>
+        <h3>{{ feed.articleCount }} articles in this feed</h3>
+        <h3>most recent: {{ feed.mostRecentArticleTitle }}</h3>
+        <h3>{{ feed.mostRecentArticleUrl }}</h3>
+    {% endfor %}
+</div>
+{% endblock %}
