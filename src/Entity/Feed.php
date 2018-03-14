@@ -27,7 +27,7 @@ class Feed
      */
     private $category;
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string")
      * @Assert\Url()
      */
     private $url;
@@ -38,7 +38,7 @@ class Feed
     private $mostRecentArticleTitle;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string")
      */
     private $mostRecentArticleUrl;
 
