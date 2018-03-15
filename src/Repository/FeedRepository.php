@@ -20,4 +20,21 @@ class FeedRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByUrl($url)
+    {
+        return $this->createQueryBuilder('feed')
+            ->where('feed.url = :value')->setParameter('value', $url)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByUrlAndCategory($url, $category)
+    {
+        return $this->createQueryBuilder('feed')
+            ->where('feed.url = :value')->setParameter('value', $url)
+            ->where('feed.category = :value')->setParameter('value', $category)
+            ->getQuery()
+            ->getResult();
+    }
 }
