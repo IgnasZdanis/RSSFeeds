@@ -3,7 +3,6 @@
 
 namespace App\Utils;
 
-
 use App\Entity\Feed;
 
 class FeedUpdater
@@ -14,7 +13,8 @@ class FeedUpdater
         $this->rssParser = $rssParser;
     }
 
-    public function updateOne(Feed $feed) : Feed{
+    public function updateOne(Feed $feed) : Feed
+    {
         $url = $feed->getUrl();
         $xml = file_get_contents($url);
         $info = $this->rssParser->getRssInfo($xml);
@@ -22,18 +22,20 @@ class FeedUpdater
         return $this->updateInformation($feed, $info);
     }
 
-    public function updateMany(array $feeds) : array {
+    public function updateMany(array $feeds) : array
+    {
         $url = array_pop($feeds)->getUrl();
         $xml = file_get_contents($url);
         $info = $this->rssParser->getRssInfo($xml);
-        foreach($feeds as $feed) {
+        foreach ($feeds as $feed) {
             $feed = $this->updateInformation($feed, $info);
         }
 
         return $feeds;
     }
 
-    private function updateInformation(Feed $feed, array $info) : Feed{
+    private function updateInformation(Feed $feed, array $info) : Feed
+    {
         $feed->setTitle($info['title']);
         $feed->setArticleCount($info['articleCount']);
         $feed->setMostRecentArticleTitle($info['latestArticleTitle']);

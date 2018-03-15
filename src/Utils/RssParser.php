@@ -3,7 +3,6 @@
 
 namespace App\Utils;
 
-
 use Symfony\Component\DomCrawler\Crawler;
 
 class RssParser
@@ -25,7 +24,8 @@ class RssParser
         return $info;
     }
 
-    private function getLatestArticleInfo(int $articleCount, string $xml) : array{
+    private function getLatestArticleInfo(int $articleCount, string $xml) : array
+    {
         $crawler = new Crawler($xml);
         $info['title'] = null;
         $info['url'] = null;
@@ -41,8 +41,7 @@ class RssParser
                         $info['title'] = $crawler->filter('title')->text();
                         $info['url'] = $crawler->filter('link')->text();
                     }
-                }
-                else {
+                } else {
                     $crawler = new Crawler($xml);
                     $info['title'] = $crawler->filterXPath('//rss/channel/item[1]/title')->text();
                     $info['url'] = $crawler->filterXPath('//rss/channel/item[1]/link')->text();
@@ -53,5 +52,4 @@ class RssParser
 
         return $info;
     }
-
 }

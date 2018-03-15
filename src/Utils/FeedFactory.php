@@ -3,7 +3,6 @@
 
 namespace App\Utils;
 
-
 use App\Entity\Feed;
 
 class FeedFactory
@@ -16,8 +15,9 @@ class FeedFactory
         $this->rssParser = $rssParser;
     }
 
-    public function createFeedFromUrl(string $url, string $category) : Feed{
-        if(!$xml = @file_get_contents($url)) {
+    public function createFeedFromUrl(string $url, string $category) : Feed
+    {
+        if (!$xml = @file_get_contents($url)) {
             throw new \InvalidArgumentException('Url is not valid or could not get its content', 2);
         }
         $info = $this->rssParser->getRssInfo($xml);

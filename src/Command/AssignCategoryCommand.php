@@ -25,8 +25,7 @@ class AssignCategoryCommand extends Command
         FeedFactory $feedFactory,
         FeedRepository $feedRepository,
         FeedUpdater $feedUpdater
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->entityManager = $em;
@@ -44,7 +43,8 @@ class AssignCategoryCommand extends Command
                 'category',
                 InputArgument::OPTIONAL,
                 'Category you want to assign to the feed.
-                 If you do not pass this argument feed will be updated in every category it is assigned to.')
+                 If you do not pass this argument feed will be updated in every category it is assigned to.'
+            )
         ;
     }
 
@@ -59,26 +59,22 @@ class AssignCategoryCommand extends Command
                 $this->feedUpdater->updateMany($feeds);
                 $this->entityManager->flush();
                 $io->success('Feed updated in ' . count($feeds) . ' categories');
-            }
-            else {
+            } else {
                 $io->error('This url is not assigned to any category');
             }
-        }
-        else {
+        } else {
             $feed = $this->feedRepository->findByUrlAndCategory($url, $category);
             if ($feed) {
                 $this->feedUpdater->updateOne(array_pop($feed));
                 $this->entityManager->flush();
                 $io->success('Feed updated in this category');
-            }
-            else {
+            } else {
                 try {
                     $feed = $this->feedFactory->createFeedFromUrl($url, $category);
                     $this->entityManager->persist($feed);
                     $this->entityManager->flush();
                     $io->success('Category successfully assigned');
-                }
-                catch (\Exception $exception) {
+                } catch (\Exception $exception) {
                     $io->error($exception->getMessage());
                 }
             }

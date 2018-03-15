@@ -63,8 +63,7 @@ class Feed
         $articleCount,
         $updateDate,
         $category
-    )
-    {
+    ) {
         $this->title = $title;
         $this->url = $url;
         $this->mostRecentArticleTitle = $mostRecentArticleTitle;
