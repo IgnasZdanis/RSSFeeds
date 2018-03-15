@@ -55,7 +55,15 @@ class Feed
      * @param $articleCount
      * @param $updateDate
      */
-    public function __construct($title, $url, $mostRecentArticleTitle, $mostRecentArticleUrl, $articleCount, $updateDate, $category)
+    public function __construct(
+        $title,
+        $url,
+        $mostRecentArticleTitle,
+        $mostRecentArticleUrl,
+        $articleCount,
+        $updateDate,
+        $category
+    )
     {
         $this->title = $title;
         $this->url = $url;

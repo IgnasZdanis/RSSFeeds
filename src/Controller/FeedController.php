@@ -14,7 +14,6 @@ class FeedController extends Controller
     public function index(string $category, FeedRepository $feedRepository)
     {
         $feeds = $feedRepository->findByCategory($category);
-        //var_dump($a);
         return $this->render('feed/index.html.twig', [
             'feeds' => $feeds,
         ]);

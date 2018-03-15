@@ -32,8 +32,8 @@ class FeedRepository extends ServiceEntityRepository
     public function findByUrlAndCategory($url, $category)
     {
         return $this->createQueryBuilder('feed')
-            ->where('feed.url = :value')->setParameter('value', $url)
-            ->where('feed.category = :value')->setParameter('value', $category)
+            ->where('feed.url = :url')->setParameter('url', $url)
+            ->andWhere('feed.category = :category')->setParameter('category', $category)
             ->getQuery()
             ->getResult();
     }

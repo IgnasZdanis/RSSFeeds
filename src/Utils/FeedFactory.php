@@ -17,8 +17,11 @@ class FeedFactory
     }
 
     public function createFeedFromUrl(string $url, string $category) : Feed{
-        $xml = file_get_contents($url);
+        if(!$xml = @file_get_contents($url)) {
+            throw new \InvalidArgumentException('Url is not valid or could not get its content', 2);
+        }
         $info = $this->rssParser->getRssInfo($xml);
+
         return new Feed(
             $info['title'],
             $url,

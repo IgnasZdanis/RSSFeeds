@@ -26,6 +26,7 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
+        "escapestudios/symfony2-coding-standard": "3.x-dev",
         "symfony/browser-kit": "^4.0",
         "symfony/css-selector": "^4.0",
         "symfony/dotenv": "^4.0",
@@ -76,6 +77,6 @@
             "id": "",
             "allow-contrib": false
         },
-        "symfony.id": "01C8G5WPS71DKSFTXN5K0YJQ7D"
+        "symfony.id": "01C8NJYGAZJTC07YY4927TG2XS"
     }
 }

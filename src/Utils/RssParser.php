@@ -12,14 +12,17 @@ class RssParser
     {
         $info = [];
         $crawler = new Crawler($xml);
+        if (!$crawler->filterXPath('//rss')->count()) {
+            throw new \InvalidArgumentException('Url is not a rss feed (e. g. https://www.nfq.lt/rss)', 1);
+        }
         $articleCount = $crawler->filterXPath('//rss/channel/item')->count();
         $latestArticleInfo = $this->getLatestArticleInfo($articleCount, $xml);
         $info['title'] = $crawler->filterXPath('//rss/channel/title')->text();
         $info['articleCount'] = $crawler->filterXPath('//rss/channel/item')->count();
         $info['latestArticleTitle'] = $latestArticleInfo['title'];
         $info['latestArticleUrl'] = $latestArticleInfo['url'];
-        return $info;
 
+        return $info;
     }
 
     private function getLatestArticleInfo(int $articleCount, string $xml) : array{
@@ -47,6 +50,7 @@ class RssParser
                 }
             }
         }
+
         return $info;
     }
 
