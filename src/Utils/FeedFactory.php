@@ -15,7 +15,6 @@ class FeedFactory
         $title = $crawler->filterXPath('//rss/channel/title')->text();
         $articles = $crawler->filterXPath('//rss/channel/item');
         $articleCount = $crawler->filterXPath('//rss/channel/item')->count();
-        $link = $crawler->filterXPath('//rss/channel/link')->text();
         $latestArticleTitle = null;
         $latestArticleUrl = null;
         if ($articleCount) {
@@ -31,6 +30,7 @@ class FeedFactory
                     }
                 }
                 else {
+                    $crawler = new Crawler($xml);
                     $latestArticleTitle = $crawler->filterXPath('//rss/channel/item[1]/title')->text();
                     $latestArticleUrl = $crawler->filterXPath('//rss/channel/item[1]/link')->text();
                     break;
@@ -39,7 +39,7 @@ class FeedFactory
         }
         return new Feed(
             $title,
-            $link,
+            $url,
             $latestArticleTitle,
             $latestArticleUrl,
             $articleCount,
